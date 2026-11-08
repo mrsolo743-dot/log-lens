@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "log-lens"
+version = "1.0.0"
+description = "Анализатор access-логов nginx/Apache: статистика, поиск подозрительной активности, автономный HTML-отчёт"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "mrsolo743-dot" }]
+keywords = ["nginx", "apache", "logs", "access-log", "security", "cli"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Environment :: Console",
+    "Topic :: System :: Logging",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "playwright>=1.40"]
+
+[project.scripts]
+log-lens = "log_lens.cli:main"
+
+[tool.setuptools]
+packages = ["log_lens"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py39"
+line-length = 130
+
+[tool.ruff.lint]
+select = ["F", "E", "W", "I", "B", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+"log_lens/html_report.py" = ["E501"]  # встроенные CSS/HTML-шаблоны
